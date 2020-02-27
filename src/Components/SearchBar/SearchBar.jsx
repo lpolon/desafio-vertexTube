@@ -14,20 +14,7 @@ export default function SearchBar(props) {
     setSearchInput(value);
   };
 
-  useEffect(() => {
-    const wasEnterPressed = (code) => {
-      if (code === 'Enter') return true;
-      return false;
-    };
-    document.addEventListener('keydown', ({ code }) => {
-      // TODO: Logic to search on pressing Enter using useHistory router hook
-    });
-    return () => {
-      document.removeEventListener('keydown', ({code}) => {
-        // same function;
-      });
-    };
-  });
+// 'keydown', ({ code enter }) to input field to search on enter
 
   return (
     <div className="SearchBar field has-addons">
