@@ -1,4 +1,6 @@
 import React from 'react';
+import 'bulma/css/bulma.css';
+import 'animate.css';
 import './App.css';
 
 export default function App() {
