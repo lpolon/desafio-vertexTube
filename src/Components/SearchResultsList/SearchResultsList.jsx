@@ -6,43 +6,47 @@ import { useParams } from 'react-router-dom';
 
 import VideoCard from '../VideoCard/VideoCard';
 
+import { fakeQuery } from './fakeDataTemp';
+
 export default function SearchResultsList() {
-  const { querySearch } = useParams();
+  // const { querySearch } = useParams();
 
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const items = fakeQuery.items;
+  const isLoading = false;
+  const error = null;
 
-  const fetchData = async (querySearch) => {
-    setIsLoading(true);
-    const response = await youtube.search(querySearch);
-    console.log(response);
-    if (typeof response === 'string') {
-      setError(response);
-      setIsLoading(false);
-    } else if (response.items.length === 0) {
-      setError('no results found. Try different keywords');
-      setIsLoading(false);
-    } else {
-      const { pagination, items } = response;
-      setItems(items);
-      // pagination here
-      setIsLoading(false);
-    }
-  };
+  // const [items, setItems] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchData(querySearch);
-  }, [querySearch]); // TODO: is this ok for pagination?
-  console.log(error);
+  // const fetchData = async (querySearch) => {
+  //   setIsLoading(true);
+  //   const response = await youtube.search(querySearch);
+  //   if (typeof response === 'string') {
+  //     setError(response);
+  //     setIsLoading(false);
+  //   } else if (response.items.length === 0) {
+  //     setError('no results found. Try different keywords');
+  //     setIsLoading(false);
+  //   } else {
+  //     const { pagination, items } = response;
+  //     setItems(items);
+  //     // pagination here
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData(querySearch);
+  // }, [querySearch]); // TODO: is this ok for pagination?
+
   return isLoading ? (
     <h1
-    className="content is-white has-text-info"
-    style={{ textAlign: 'center' }}
-  >
-    loading...
-  </h1>
-    // <button className="button is-white has-text-info is-loading"></button>
+      className="content is-white has-text-info"
+      style={{ textAlign: 'center' }}
+    >
+      loading...
+    </h1>
   ) : error !== null ? (
     <h1
       className="content is-white has-text-danger"
