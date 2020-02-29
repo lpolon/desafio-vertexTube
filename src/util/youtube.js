@@ -1,5 +1,3 @@
-// key=API_KEY
-
 import apiKey from './apiKey';
 import queryString from 'query-string';
 
@@ -14,10 +12,11 @@ export const youtube = {
     const queryParams = queryString.stringify(this.queryParams);
     return `${this.endpoint}?${queryParams}`;
   },
-  
+
   async search(searchValue) {
+    if (typeof searchValue === 'undefined' || searchValue.trim() === '')
+      return `missing search params`;
     this.queryParams.q = searchValue;
-    console.log(this.query);
     try {
       const response = await fetch(this.query);
       const json = await response.json();
@@ -27,7 +26,7 @@ export const youtube = {
             errors: [{ reason, message }],
           },
         } = json;
-        return { error: `${reason} ${message}` };
+        return `${reason} ${message}`;
       } else {
         const {
           pageInfo: { totalResults, resultsPerPage },
@@ -45,9 +44,9 @@ export const youtube = {
         }
         if (json.hasOwnProperty('prevPageToken')) {
           const { prevPageToken } = json;
-          outputObj.pagination.nextPageToken = prevPageToken;
+          outputObj.pagination.prevPageToken = prevPageToken;
         } else {
-          outputObj.pagination.nextPageToken = null;
+          outputObj.pagination.prevPageToken = null;
         }
         return outputObj;
       }

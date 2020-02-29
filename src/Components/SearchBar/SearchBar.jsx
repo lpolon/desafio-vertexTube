@@ -3,18 +3,18 @@ import './SearchBar.css';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import RemoveSearchInputButton from '../RemoveSearchInputButton';
 
 export default function SearchBar(props) {
   const [searchInput, setSearchInput] = useState('');
 
+  const locationHistory = useHistory();
+  
   const handleChange = (value) => {
     setSearchInput(value);
   };
-
-// 'keydown', ({ code enter }) to input field to search on enter
 
   return (
     <div className="SearchBar field has-addons">
@@ -26,7 +26,10 @@ export default function SearchBar(props) {
           className="input is-info"
           value={searchInput}
           onChange={({ target: { value } }) => handleChange(value)}
-          required
+          onKeyDown={({ key }) => {
+            if (key !== 'Enter') return;
+            locationHistory.push(`/search/${searchInput}`);
+          }}
         />
         <span className="icon is-small is-left">
           <FA icon={faSearch} />
@@ -38,7 +41,9 @@ export default function SearchBar(props) {
         </span>
       </div>
       <div className="control">
-        <Link className="button is-info">Buscar</Link>
+        <Link to={`/search/${searchInput}`} className="button is-info">
+          Buscar
+        </Link>
       </div>
     </div>
   );
