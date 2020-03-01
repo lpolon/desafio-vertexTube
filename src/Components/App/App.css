@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  overflow-y: hidden;
 }
 
 .App {
@@ -9,7 +10,7 @@ html {
   height: 100vh;
   overflow: hidden;
   overflow-y: auto;
-  /* background-color: lightgray; */
+  padding-top: 1%;
 }
 
 h1 {

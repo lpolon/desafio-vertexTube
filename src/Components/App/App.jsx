@@ -18,7 +18,7 @@ export default function App() {
     searchOverlayToggle = true;
   }
   const props = useSpring({
-    height: searchOverlayToggle ? '100vh' : '4vh',
+    height: searchOverlayToggle ? '99vh' : '4vh',
   });
 
   return (

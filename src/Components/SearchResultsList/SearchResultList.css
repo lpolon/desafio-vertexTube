@@ -1,4 +1,8 @@
 .VideoCards-container {
-  /* background-color: red; */
   margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: baseline;
 }
