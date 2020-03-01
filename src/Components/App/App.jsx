@@ -5,48 +5,35 @@ import './App.css';
 
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
-import { useTransition, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResultsList from '../SearchResultsList/SearchResultsList';
 import NoMatch from '../NoMatch';
 
 export default function App() {
-  // const { location } = useContext(__RouterContext);
-  const location = useLocation();
-  const transitions = useTransition(location, (location) => location.pathname, {
-    from: {
-      transform: 'translate3d(0,-40px,0)',
-      // opacity: 0,
-    },
-    enter: {
-      transform: 'translate3d(0,0px,0)',
-      // opacity: 1,
-    },
-    leave: {
-      transform: 'translate3d(0,-40px,0)',
-      // opacity: 0,
-    },
+  const { pathname } = useLocation();
+  let searchOverlayToggle = false;
+  if (pathname === '/') {
+    searchOverlayToggle = true;
+  }
+  const props = useSpring({
+    height: searchOverlayToggle ? '100vh' : '4vh',
   });
-  console.log(location);
 
   return (
     <div className="App">
-      {transitions.map(({ item, props, key }) => (
-        <animated.div key={key} style={props}>
-          <Switch location={item}>
-            <Route exact path="/" component={SearchBar} />
-            <Route exact path="/search/">
-              <Redirect to="/" />
-            </Route>
-            <Route exact path="/search/:querySearch">
-              <SearchBar />
-              <SearchResultsList />
-            </Route>
-            <Route path="*" component={NoMatch} />
-          </Switch>
-        </animated.div>
-      ))}
+      <animated.div className="SearchBar field has-addons" style={props}>
+        <SearchBar />
+      </animated.div>
+      <Switch>
+        <Route exact path="/"></Route>
+        <Redirect exact from="/search" to="/" />
+        <Route exact path="/search/:querySearch">
+          <SearchResultsList />
+        </Route>
+        <Route path="*" component={NoMatch} />
+      </Switch>
     </div>
   );
 }

@@ -6,21 +6,15 @@ html {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   color: black;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 h1 {
-  padding: .77rem;
+  padding: 0.77rem;
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 1.88rem;
-}
-
-/* Styling for desktop */
-@media only screen and (min-width: 600px) {
-  html {
-    font-size: 18px;
-  }
-  
-  /* .App {} */
 }
