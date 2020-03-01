@@ -1,0 +1,26 @@
+.VideoCard {
+  margin: 0% 2% 2.5%;
+  /* padding: 1%; */
+}
+
+.title {
+  /* align-self: center; */
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.description {
+  font-weight: 300;
+  /* text-align: justify; */
+}
+
+.drop-shadow {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.test {
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 4px;
+}

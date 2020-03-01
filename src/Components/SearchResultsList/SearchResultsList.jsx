@@ -6,38 +6,38 @@ import { useParams } from 'react-router-dom';
 
 import VideoCard from '../VideoCard/VideoCard';
 
-// import { fakeQuery } from './fakeDataTemp';
-  // const items = fakeQuery.items;
-  // const isLoading = false;
-  // const error = null;
+import { fakeQuery } from './fakeDataTemp';
+const items = fakeQuery.items;
+const isLoading = false;
+const error = null;
 
 export default function SearchResultsList() {
   const { querySearch } = useParams();
 
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [items, setItems] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const fetchData = async (querySearch) => {
-    setIsLoading(true);
-    const response = await youtube.search(querySearch);
-    if (typeof response === 'string') {
-      setError(response);
-      setIsLoading(false);
-    } else if (response.items.length === 0) {
-      setError('no results found. Try different keywords');
-      setIsLoading(false);
-    } else {
-      const { pagination, items } = response;
-      setItems(items);
-      // pagination here
-      setIsLoading(false);
-    }
-  };
+  // const fetchData = async (querySearch) => {
+  //   setIsLoading(true);
+  //   const response = await youtube.search(querySearch);
+  //   if (typeof response === 'string') {
+  //     setError(response);
+  //     setIsLoading(false);
+  //   } else if (response.items.length === 0) {
+  //     setError('no results found. Try different keywords');
+  //     setIsLoading(false);
+  //   } else {
+  //     const { pagination, items } = response;
+  //     setItems(items);
+  //     // pagination here
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData(querySearch);
-  }, [querySearch]); // TODO: is this ok for pagination?
+  // useEffect(() => {
+  //   fetchData(querySearch);
+  // }, [querySearch]); // TODO: is this ok for pagination?
 
   return isLoading ? (
     <progress class="progress is-small is-info" max="100"></progress>
@@ -49,30 +49,32 @@ export default function SearchResultsList() {
       {error}
     </h1>
   ) : (
-    items.map((item) => {
-      let {
-        id: { videoId },
-        snippet: {
-          title,
-          description,
-          thumbnails: {
-            default: { url },
+    <div className="VideoCards-container">
+      {items.map((item) => {
+        let {
+          id: { videoId },
+          snippet: {
+            title,
+            description,
+            thumbnails: {
+              default: { url },
+            },
           },
-        },
-      } = item;
-      if (typeof videoId === 'undefined') {
-        return null;
-      }
-      return (
-        <div key={videoId}>
-          <VideoCard
-            videoId={videoId}
-            title={title}
-            description={description}
-            thumbnail={url}
-          />
-        </div>
-      );
-    })
+        } = item;
+        if (typeof videoId === 'undefined') {
+          return null;
+        }
+        return (
+          <div key={videoId}>
+            <VideoCard
+              videoId={videoId}
+              title={title}
+              description={description}
+              thumbnail={url}
+            />
+          </div>
+        );
+      })}
+    </div>
   );
 }
