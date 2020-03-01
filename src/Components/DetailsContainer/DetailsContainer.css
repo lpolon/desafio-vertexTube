@@ -1,0 +1,47 @@
+.Youtube-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  font-weight: 300;
+  margin: 2%;
+  line-height: 1.8;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin-top: 1rem;
+}
+
+.left-container {
+  min-width: 320px;
+  max-width: 600px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.left-container h1 {
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.right-container {
+  text-align: center;
+  padding: 0 1rem;
+  min-width: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.stat-container {
+  margin: 0 1rem;
+}

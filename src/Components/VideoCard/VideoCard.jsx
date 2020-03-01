@@ -2,6 +2,9 @@ import React from 'react';
 
 import './VideoCard.css';
 
+
+// TODO: Link with videoId and router
+
 export default function VideoCard({ videoId, title, description, thumbnail }) {
   return (
     <div className="VideoCard card is-shadowless">

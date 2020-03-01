@@ -9,6 +9,7 @@ import { useSpring, animated } from 'react-spring';
 
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResultsList from '../SearchResultsList/SearchResultsList';
+import DetailsContainer from '../DetailsContainer/DetailsContainer';
 import NoMatch from '../NoMatch';
 
 export default function App() {
@@ -31,6 +32,9 @@ export default function App() {
         <Redirect exact from="/search" to="/" />
         <Route exact path="/search/:querySearch">
           <SearchResultsList />
+        </Route>
+        <Route exact path="/details/:videoId">
+          <DetailsContainer />
         </Route>
         <Route path="*" component={NoMatch} />
       </Switch>
