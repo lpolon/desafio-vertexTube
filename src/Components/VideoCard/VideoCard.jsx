@@ -3,8 +3,6 @@ import React from 'react';
 import './VideoCard.css';
 import { Link } from 'react-router-dom';
 
-// TODO: Link with videoId and router
-
 export default function VideoCard({ videoId, title, description, thumbnail }) {
   return (
     <Link
