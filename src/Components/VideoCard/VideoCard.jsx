@@ -1,15 +1,17 @@
 import React from 'react';
 
 import './VideoCard.css';
-
+import { Link } from 'react-router-dom';
 
 // TODO: Link with videoId and router
 
 export default function VideoCard({ videoId, title, description, thumbnail }) {
   return (
-    <div className="VideoCard card is-shadowless">
+    <Link
+      to={`/details/${videoId}`}
+      className="VideoCard card is-shadowless is-block"
+    >
       <div className="card-content">
-        {/* adjust margin */}
         <div className="media is-marginless is-flex">
           <div className="media-left">
             <figure className="image is-64x64">
@@ -25,6 +27,6 @@ export default function VideoCard({ videoId, title, description, thumbnail }) {
           <p>{description}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

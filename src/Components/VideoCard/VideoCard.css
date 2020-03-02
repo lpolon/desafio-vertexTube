@@ -4,8 +4,9 @@
   border-radius: 4px;
   transition: border 0.15s ease-out;
   cursor: pointer;
+  width: 600px;
   min-width: 400px;
-  max-width: 600px;
+  min-height: 180px;
 }
 
 .VideoCard:hover {

@@ -1,23 +1,54 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import './DetailsContainer.css';
 
-import Youtube from 'react-youtube';
+import apiKey from '../../util/apiKey';
+import { useParams } from 'react-router-dom';
 
-import { fakeData } from './fakeDetailsFetchData';
 import YouTube from 'react-youtube';
+import YoutubeApi from '../../util/youtube';
+const youtube = new YoutubeApi('snippet,statistics', apiKey, 'videos');
 
-const videoId = 'PufZCu49X6k';
-
-const {
-  items: [
-    {
-      snippet: { title, description },
-      statistics: { viewCount, likeCount, dislikeCount },
-    },
-  ],
-} = fakeData;
 export default function DetailsContainer() {
-  return (
+  const { videoId } = useParams();
+
+  const [videoDetails, setVideoDetails] = useState({});
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = async (videoId) => {
+    setIsLoading(true);
+    const response = await youtube.getVideoDetails(videoId);
+    if (typeof response === 'string') {
+      setError(response);
+      setIsLoading(false);
+    } else {
+      setVideoDetails(response);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(videoId);
+  }, [videoId]);
+
+  const {
+    title,
+    description,
+    viewCount,
+    likeCount,
+    dislikeCount,
+  } = videoDetails;
+
+  return isLoading ? (
+    <progress className="progress is-small is-info" max="100"></progress>
+  ) : error !== null ? (
+    <h1
+      className="content is-white has-text-danger"
+      style={{ textAlign: 'center' }}
+    >
+      {error}
+    </h1>
+  ) : (
     <Fragment>
       <section className="hero is-dark">
         <YouTube videoId={videoId} containerClassName=" Youtube-container" />
