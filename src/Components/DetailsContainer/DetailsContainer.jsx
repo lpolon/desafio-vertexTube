@@ -32,8 +32,8 @@ export default function DetailsContainer() {
   }, [videoId]);
 
   const {
-    title,
-    description,
+    decodedTitle: title,
+    decodedDescription: description,
     viewCount,
     likeCount,
     dislikeCount,

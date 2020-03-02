@@ -1,4 +1,5 @@
 import queryString from 'query-string';
+import { decode } from 'he';
 
 export default class YoutubeApi {
   constructor(part, key, resourceType) {
@@ -28,7 +29,6 @@ export default class YoutubeApi {
       return `missing search params`;
     this.queryParams.q = searchValue;
     try {
-      console.log('oi, query:', this.query);
       const response = await fetch(this.query);
       const json = await response.json();
       if (json.hasOwnProperty('error')) {
@@ -90,10 +90,11 @@ export default class YoutubeApi {
             },
           ],
         } = json;
-
+        const decodedTitle = decode(title);
+        const decodedDescription = decode(description);
         const outputObj = {
-          title,
-          description,
+          decodedTitle,
+          decodedDescription,
           viewCount,
           likeCount,
           dislikeCount,

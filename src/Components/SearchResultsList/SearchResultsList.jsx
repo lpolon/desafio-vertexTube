@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import './SearchResultList.css';
 import apiKey from '../../util/apiKey';
 import YoutubeApi from '../../util/youtube';
+import { decode } from 'he';
+
 import { useParams } from 'react-router-dom';
 
 import VideoCard from '../VideoCard/VideoCard';
@@ -63,6 +65,9 @@ export default function SearchResultsList() {
             },
           },
         } = item;
+        const decodedTitle = decode(title);
+        const decodedDescription = decode(description);
+
         if (typeof videoId === 'undefined') {
           return null;
         }
@@ -70,8 +75,8 @@ export default function SearchResultsList() {
           <Fragment key={videoId}>
             <VideoCard
               videoId={videoId}
-              title={title}
-              description={description}
+              title={decodedTitle}
+              description={decodedDescription}
               thumbnail={url}
             />
           </Fragment>
