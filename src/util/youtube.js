@@ -24,10 +24,13 @@ export default class YoutubeApi {
     return `${this.endpoint}?${queryParams}`;
   }
 
-  async search(searchValue) {
+  async search(searchValue, pageToken) {
     if (typeof searchValue === 'undefined' || searchValue.trim() === '')
       return `missing search params`;
     this.queryParams.q = searchValue;
+    if (typeof pageToken !== 'undefined') {
+      this.queryParams.pageToken = pageToken;
+    }
     try {
       const response = await fetch(this.query);
       const json = await response.json();
