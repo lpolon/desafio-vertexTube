@@ -3,7 +3,7 @@ desafio para vaga de front-end
 
 # instructions
 deployed at:
-https://desafio-vertex-leo.herokuapp.com/
+https://vertextube-leo.herokuapp.com/
 
 ## design decisions
 All global context from this app comes from window.location (browser's URL) and since i am using react-router-dom i can use their own custom hooks useLocation and useHistory to share context between components. It provides a better user experience since a user can navigate directly to a bookmark or link to see a video detail.
