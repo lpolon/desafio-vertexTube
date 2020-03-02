@@ -1,21 +1,26 @@
 import React, { Fragment } from 'react';
 import './DetailsContainer.css';
 
-import Youtube from 'react-youtube';
-
-import { fakeData } from './fakeDetailsFetchData';
 import YouTube from 'react-youtube';
+import YoutubeApi from '../../util/youtube';
 
-const videoId = 'PufZCu49X6k';
+import apiKey from '../../util/apiKey';
+const youtube = new YoutubeApi('snippet,statistics', apiKey, 'videos');
 
-const {
-  items: [
-    {
-      snippet: { title, description },
-      statistics: { viewCount, likeCount, dislikeCount },
-    },
-  ],
-} = fakeData;
+// youtube.getVideoDetails('PufZCu49X6k');
+// console.log('oi!')
+///////////////////////////////////
+// import { fakeData } from './fakeDetailsFetchData';
+// const videoId = 'PufZCu49X6k';
+// const {
+//   items: [
+//     {
+//       snippet: { title, description },
+//       statistics: { viewCount, likeCount, dislikeCount },
+//     },
+//   ],
+// } = fakeData;
+
 export default function DetailsContainer() {
   return (
     <Fragment>
